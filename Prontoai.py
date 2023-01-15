@@ -16,13 +16,12 @@ def git_info(path):
     recentcommit = datetime.now(timezone.utc) - commit_datetime < timedelta(weeks=1)
     print('recent commit:',bool(recentcommit))
 
-    if len(sys.argv) > 2:
-        name = sys.argv[2]
-        author = check_output(['git', 'log', '-1', '--format=%an']).strip()
-        print('blame ', name, ':', author.decode() == name)
-
+    author = check_output(['git', 'log', '-1', '--format=%an']).strip()
+    if author.decode() == 'Rufus':
+        print('blame Rufus',True)
     else:
-        exit(0)
+        print('blame Rufus',False)
+
 
 if __name__ == "__main__":
     path = sys.argv[1]
